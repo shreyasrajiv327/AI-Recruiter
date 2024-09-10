@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Applications</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/view_applications.css') }}">
+</head>
+<body>
+    <div class="header">
+        <form action="{{ url_for('logout') }}" method="post" class="logout-form">
+            <button type="submit" class="logout-button">Logout</button>
+        </form>
+    </div>  
+
+    <div class="container-form">
+        <div class="flash-messages">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <ul class="flashes">
+                        {% for category, message in messages %}
+                            <li class="flash {{ category }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+        </div>
+
+        <h1>Applications for {{ job.company_name }} - {{ job.position }}</h1>
+        
+        {% if applications|length == 0 %}
+            <p>No applications found for this job.</p>
+        {% else %}
+            <div class="applications">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Resume Content</th>
+                            <th>Skills</th>
+                            <th>Application Date</th>
+                            <th>Status</th> <!-- Add this line for the "Status" column -->
+                            {% if applications[0].JDscore is defined %}
+                                <th>JDscore</th>
+                            {% endif %}
+                            {% if applications[0].primarySkillScore is defined %}
+                                <th>Primary Skill Score</th>
+                            {% endif %}
+                            {% if applications[0].secondarySkillScore is defined %}
+                                <th>Secondary Skill Score</th>
+                            {% endif %}
+                            {% if applications[0].total_score is defined %}
+                                <th>Total Score</th>
+                            {% endif %}
+                            {% if applications[0].interview_score is defined %}
+                                <th>Interview Score</th>
+                            {% endif %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for application in applications %}
+                            <tr>
+                                <td>{{ application.name }}</td>
+                                <td>{{ application.email }}</td>
+                                <td>{{ application.resume_content }}</td>
+                                <td>{{ application.skills }}</td>
+                                <td>{{ application.application_date }}</td>
+                                <td>{{ application.status }}</td> 
+                                {% if application.JDscore is defined %}
+                                    <td>{{ application.JDscore }}</td>
+                                {% endif %}
+                                {% if application.primarySkillScore is defined %}
+                                    <td>{{ application.primarySkillScore }}</td>
+                                {% endif %}
+                                {% if application.secondarySkillScore is defined %}
+                                    <td>{{ application.secondarySkillScore }}</td>
+                                {% endif %}
+                                {% if application.total_score is defined %}
+                                    <td>{{ application.total_score }}</td>
+                                {% endif %}
+                                {% if application.interview_score is defined %}
+                                    <td>{{ application.interview_score }}</td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="actions">
+                <form action="{{ url_for('compile_applications', job_id=job._id) }}" method="post">
+                    <button type="submit" class="compile-applications-button {% if job.status == 'open' %}disabled{% endif %}">Compile Applications</button>
+                </form>
+                <form action="{{ url_for('send_emails_to_top_candidates', job_id=job._id) }}" method="post">
+                    <button type="submit" class="send-emails-button {% if job.compiled == 'no' %}disabled{% endif %}">Send Emails to Top 5 Candidates</button>
+                </form>                
+            {% endif %}
+                <form action="{{ url_for('close_applications', job_id=job._id) }}" method="post">
+                    <button type="submit" class="close-applications-button">Close Applications</button>
+                </form>
+            </div>
+        <form action="{{ url_for('recruiter_dashboard') }}" class="back-form">
+            <button type="submit" class="back-button">Back</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,120 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    background: linear-gradient(to bottom, #E8F3EA, #FFFFFF, #F0F0FF);
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+.container-form {
+    max-width: 95%;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #FFFFFF;
+}
+
+.logout-form {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0;
+}
+
+.header {
+    position: absolute;
+    left: 30px;
+}
+
+.back-form {
+    margin-top: 30px;
+}
+
+.back-button {
+    margin-left: 30px;
+}
+
+.logout-button, .back-button {
+    padding: 10px 20px;
+    background-color: #dc3545;
+    border: none;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+  
+.logout-button:hover, .back-button:hover {
+    background-color: #c82333;
+}
+
+.applications {
+    margin-bottom: 20px;
+}
+
+.applications h2 {
+    margin-bottom: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+button {
+    background-color: #098931;
+    color: white;
+    padding: 10px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+  
+button:hover {
+    background-color: #0a5823;
+}
+
+.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.flash-messages {
+    margin: 20px auto;
+    width: 80%;
+    max-width: 800px;
+}
+
+.flashes {
+    list-style-type: none;
+    padding: 0;
+}
+
+.flash {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.flash.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.flash.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}

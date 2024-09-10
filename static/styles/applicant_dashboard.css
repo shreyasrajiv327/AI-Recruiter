@@ -1,0 +1,207 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+  background: linear-gradient(to bottom, #E8F3EA, #FFFFFF, #F0F0FF);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding: 20px;
+  height: 100vh;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+.header {
+  position: absolute;
+  left: 30px;
+}
+
+.job-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  position: relative;
+}
+
+.job-card {
+  width: 500px;
+  height: 400px;
+  margin: 20px;
+  perspective: 1000px;
+  position: relative;
+}
+
+.job-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.job-card:hover .job-card-inner {
+  transform: rotateY(180deg);
+}
+
+.job-card-front, .job-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: white;
+  overflow: auto;
+}
+
+.job-card-front {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.job-card-back {
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-y: auto; /* Add scrollbar for vertical overflow */
+  padding: 20px; /* Add padding to create space for scrollbar */
+  box-sizing: border-box; /* Ensure padding is included in the height */
+}
+
+.job-card-back-content {
+  overflow-y: auto;
+  max-height: 300px; /* Adjust as needed */
+}
+
+button {
+  background-color: #098931;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0a5823;
+}
+
+.view-applications-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.view-applications-button:hover {
+  background-color: #0056b3;
+}
+
+.logout-button {
+  padding: 10px 20px;
+  background-color: #dc3545;
+  border: none;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background-color: #c82333;
+}
+
+.flash-messages {
+  margin: 20px auto;
+  width: 80%;
+  max-width: 800px;
+}
+
+.flashes {
+  list-style-type: none;
+  padding: 0;
+}
+
+.flash {
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.flash.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.flash.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+footer {
+  margin-top: auto;
+  width: 100%;
+  background-color: #f8f9fa;
+  padding: 20px 0;
+  text-align: center;
+  box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.1);
+}
+
+.footer-links {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.footer-links li {
+  display: inline;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: #155724;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #155724;
+}
+
+.search-bar-container {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+}
+
+.search-form input[type="text"] {
+  padding: 5px;
+  font-size: 14px;
+}
+
+.search-form button {
+  padding: 5px 10px;
+  margin-left: 5px;
+  font-size: 14px;
+  cursor: pointer;
+}

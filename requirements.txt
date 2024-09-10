@@ -1,0 +1,10 @@
+flask==2.2.5
+matplotlib==3.8.0
+pymongo==4.7.1
+werkzeug==2.2.3
+pypdf2==2.11.1
+langchain-openai==0.1.4
+langchain-community==0.0.13
+google-auth-oauthlib==0.5.3
+google-api-python-client==2.70.0
+requests==2.27.1

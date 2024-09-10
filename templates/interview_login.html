@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/interview_login.css') }}">
+    <title>Enter Job Code</title>
+</head>
+<body>
+    <h3>Enter the code received via email</h3>
+    <form action="{{ url_for('interview_login') }}" method="post">
+        <label for="code">Enter Code:</label>
+        <input type="text" id="code" name="code" required>
+        <button type="submit">Start Interview</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/recruiter_dashboard.css') }}">
+    <title>Recruiter Dashboard</title>
+</head>
+<body>
+    <div class="header">
+        <form action="{{ url_for('logout') }}" method="post" class="logout-form">
+            <button type="submit" class="logout-button">Logout</button>
+        </form>
+    </div>
+    
+    <div class="flash-messages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flashes">
+                    {% for category, message in messages %}
+                        <li class="flash {{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+    
+    <h1>RECRUITER DASHBOARD</h1>
+    <h2>Your Jobs</h2>
+    
+    <div class="create-job">
+        <a href="{{ url_for('recruiter_dashboard_create') }}" class="create-job-button">Create New Job</a>
+    </div>
+    
+    <div class="job-cards" id="jobCards">
+        {% for job in jobs %}
+        <div class="job-card" data-company="{{ job.company_name }}">
+            <div class="job-details">
+                <h2>{{ job.company_name }}</h2>
+                <h3>{{ job.position }}</h3>
+                <p><strong>Status:</strong> {{ job.status }}</p>
+            </div>
+            <div class="job-actions">
+                <form action="{{ url_for('view_applications', job_id=job._id) }}" method="post">
+                    <button type="submit" class="view-applications-button">View Applications</button>
+                </form>
+                <form action="{{ url_for('view_graph', job_id=job._id) }}" method="post" target="_blank">
+                    <button type="submit" class="view-graph-button">View Metrics</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <footer>
+        <ul class="footer-links">
+            <li><a href="https://www.broadrange.ai/" target="_blank">About</a></li>
+            <li><a href="https://www.broadrange.ai/" target="_blank">Contact</a></li>
+            <li><a href="https://www.broadrange.ai/" target="_blank">Privacy Policy</a></li>
+            <li><a href="https://www.broadrange.ai/" target="_blank">Terms of Service</a></li>
+        </ul>
+    </footer>
+</body>
+</html>

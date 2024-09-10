@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Applications</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/view_my_applications.css') }}">
+</head>
+<body>
+    <div class="header">
+        <form action="{{ url_for('logout') }}" method="post" class="logout-form">
+            <button type="submit" class="logout-button">Logout</button>
+        </form>
+    </div>  
+
+    <div class="container">
+        <div class="flash-messages">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <ul class="flashes">
+                        {% for category, message in messages %}
+                            <li class="flash {{ category }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+        </div>
+
+        <h1>My Applications</h1>
+        
+        {% if applications|length == 0 %}
+            <p>You have not submitted any applications.</p>
+        {% else %}
+            <div class="applications">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Company</th>
+                            <th>Position</th>
+                            <th>Application Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for application in applications %}
+                            <tr>
+                                <td>{{ application.company_name }}</td>
+                                <td>{{ application.position }}</td>
+                                <td>{{ application.application_date }}</td>
+                                <td>{{ application.status }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+        
+        <form action="{{ url_for('applicant_dashboard') }}" class="back-form">
+            <button type="submit" class="back-button">Back</button>
+        </form>
+    </div>
+</body>
+</html>

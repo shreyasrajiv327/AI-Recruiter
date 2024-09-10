@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Applicant Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/applicant_dashboard.css') }}">
+</head>
+<body>
+    <div class="header">
+        <form action="{{ url_for('logout') }}" method="post" class="logout-form">
+            <button type="submit" class="logout-button">Logout</button>
+        </form>
+    </div>
+
+    <div class="flash-messages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flashes">
+                    {% for category, message in messages %}
+                        <li class="flash {{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+    <h1>APPLICANT DASHBOARD</h1>
+    <h2>Available Jobs</h2>
+
+    <div class="search-bar-container">
+        <form action="{{ url_for('applicant_dashboard') }}" method="post" class="search-form">
+            <input type="text" name="search_query" id="searchInput" placeholder="Search by company name">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    
+    <button class='view-applications-button' onclick="location.href='{{ url_for('view_my_applications') }}'">View My Applications</button>
+    <div class="job-cards">
+        {% for job in jobs %}
+        <div class="job-card">
+            <div class="job-card-inner">
+                <div class="job-card-front">
+                    <h2>{{ job.company_name }}</h2>
+                    <h3>{{ job.position }}</h3>
+                    <p>{{ job.primary_skills }}</p>
+                    <p>{{ job.secondary_skills }}</p>
+                </div>
+                <div class="job-card-back">
+                    <h2>{{ job.company_name }}</h2>
+                    <h3>{{ job.position }}</h3>
+                    <p><strong>Job Description:</strong>{{ job.job_description }}</p>
+                    <p><strong>Primary Skills:</strong> {{ job.primary_skills }}</p>
+                    <p><strong>Secondary Skills:</strong> {{ job.secondary_skills }}</p>
+                    <form action="{{ url_for('apply_job', job_id=job._id) }}" method="get">
+                        <button type="submit">Apply</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <footer>
+        <ul class="footer-links">
+            <li><a href="https://www.broadrange.ai/" target="_blank">About</a></li>
+            <li><a href="https://www.broadrange.ai/" target="_blank">Contact</a></li>
+            <li><a href="https://www.broadrange.ai/" target="_blank">Privacy Policy</a></li>
+            <li><a href="https://www.broadrange.ai/" target="_blank">Terms of Service</a></li>
+        </ul>
+    </footer>
+    
+    <script>
+        function filterJobs() {
+            var input = document.getElementById('searchInput').value.toLowerCase();
+            var jobCards = document.getElementsByClassName('job-card');
+
+            for (var i = 0; i < jobCards.length; i++) {
+                var companyName = jobCards[i].getAttribute('data-company').toLowerCase();
+                if (companyName.includes(input)) {
+                    jobCards[i].style.display = "";
+                } else {
+                    jobCards[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/home.css') }}">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+    <title>AI Recruiter</title>
+    <style>
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e0e0e0;
+            position: relative;
+        }
+        .header-title {
+            font-size: 24px;
+            font-weight: bold;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .header-logo {
+            width: 50px; 
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <div class="header-title">AI-JOB RECRUITER</div>
+        <img class="header-logo" src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
+    </div>
+    <div class="login-page">
+        <div class="recruiter-login">
+            <h2 class="header">For Recruiters</h2>
+            <p>Elevate hiring efficiency with our Recruiters hub.<br>Streamline processes and collaborate seamlessly</p>
+            <form action="{{ url_for('authenticate') }}" method="post">
+                <input type="hidden" name="role" value="recruiter">
+                <input type="hidden" name="action" value="login">
+                <button class="recruiter-login-button" type="submit">Login</button>
+            </form>
+            <form action="{{ url_for('authenticate') }}" method="post">
+                <input type="hidden" name="role" value="recruiter">
+                <input type="hidden" name="action" value="signup">
+                <button class="recruiter-signup-button" type="submit">Signup</button>
+            </form>
+        </div>
+        <div class="applicant-login">
+            <h2 class="header">For Applicants</h2>
+            <p>Enhance your application journey with our Applicant hub.<br>Simplify processes and navigate seamlessly</p>
+            <form action="{{ url_for('authenticate') }}" method="post">
+                <input type="hidden" name="role" value="applicant">
+                <input type="hidden" name="action" value="login">
+                <button class="applicant-login-button" type="submit">Login</button>
+            </form>
+            <form action="{{ url_for('authenticate') }}" method="post">
+                <input type="hidden" name="role" value="applicant">
+                <input type="hidden" name="action" value="signup">
+                <button class="applicant-signup-button" type="submit">Signup</button>
+            </form>
+        </div>
+    </div>
+    <footer>
+        <ul class="footer-links">
+            <li><a href="https://www.broadrange.ai/" target="_blank">About</a></li>
+            <li><a href="https://www.broadrange.ai/" target="_blank">Contact</a></li>
+            <li><a href="https://www.broadrange.ai/" target="_blank">Privacy Policy</a></li>
+            <li><a href="https://www.broadrange.ai/" target="_blank">Terms of Service</a></li>
+        </ul>
+    </footer>
+</body>
+</html>
